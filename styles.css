@@ -1,0 +1,599 @@
+:root {
+    --primary-color: #333333;
+    --background-color: #FFFFFF;
+    --text-color: #333333;
+    --border-color: #E0E0E0;
+    --hover-color: #666666;
+    --base-font-size: 16px;
+    --base-font-family: 'Microsoft YaHei', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    font-family: var(--base-font-family);
+    color: var(--text-color);
+    min-height: 100vh;
+    font-size: var(--base-font-size);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 标题区域样式 */
+.page-header {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.02), transparent);
+    border-bottom: 2px solid var(--border-color);
+    position: relative;
+}
+
+.page-header h1 {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin: 0;
+    text-shadow: none;
+    font-family: var(--base-font-family);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #999999;
+    margin-top: 0.5rem;
+    font-family: var(--base-font-family);
+}
+
+.save-btn, .reset-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 手串展示区域 */
+.bracelet-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8rem 0 3rem;
+    position: relative;
+}
+
+.bracelet-display {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-height: 600px;
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+/* 手串圆圈样式 */
+.bracelet-circle {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    border: 2px dashed #ccc;
+    border-radius: 50%;
+    margin: 20px auto;
+    transform-origin: center center;
+    transition: none;
+    will-change: transform;
+    user-select: none;
+    z-index: 2;
+}
+
+/* 如果您的圆圈是通过JavaScript动态调整大小，
+   确保使用transform: scale()而不是直接改变width/height */
+.bracelet-circle.resizing {
+    /* 添加额外的过渡属性使变化更平滑 */
+    transition: transform 0.3s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+}
+
+/* 示例珠子样式 */
+.example-bead, .example-bead.active {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    transform-origin: center center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 1px solid #888;
+    background-color: transparent;
+}
+
+.example-bead.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 控制区域样式 */
+.bracelet-controls {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 3rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    font-size: 1.4rem;
+    z-index: 10;
+}
+
+.size-control, .bead-size-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 0.3rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1.3rem;
+}
+
+input[type="range"] {
+    width: 180px;
+    height: 20px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+/* 滑块轨道样式 */
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    background: #E0E0E0;
+    border-radius: 3px;
+    border: none;
+}
+
+input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #E0E0E0;
+    border-radius: 3px;
+    border: none;
+}
+
+/* 滑块手样式 */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+    background: transparent;
+    margin-top: -8px;
+    cursor: pointer;
+    position: relative;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid #333333;
+}
+
+input[type="range"]::-moz-range-thumb {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #333333;
+    border: none;
+    cursor: pointer;
+}
+
+/* 聚焦时的样式 */
+input[type="range"]:focus {
+    outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+    background: #D0D0D0;
+}
+
+input[type="range"]:focus::-moz-range-track {
+    background: #D0D0D0;
+}
+
+.unit {
+    color: #999999;
+    font-size: 1.3rem;
+}
+
+/* 串珠展示区域 */
+.beads-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.color-section {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.color-section h3 {
+    text-align: center;
+    padding: 0.5rem;
+    margin: 0 0 1rem 0;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-family: var(--base-font-family);
+}
+
+.beads-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 1rem;
+}
+
+/* 按钮样式 */
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.2rem;
+    font-family: var(--base-font-family);
+}
+
+.btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* 刻度样式 */
+.ruler-marks {
+    position: absolute;
+    width: calc(100% - 24px);
+    height: 20px;
+    bottom: 0;
+    left: 12px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.mark {
+    position: relative;
+    width: 1px;
+    height: 8px;
+    background: #999999;
+}
+
+.mark.active {
+    background: #333333;
+}
+
+.mark-label {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #999999;
+    white-space: nowrap;
+}
+
+.mark-label.active {
+    color: #333333;
+}
+
+/* 添加可拖拽珠子的样式 */
+.bead-item {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 10px;
+    cursor: grab;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.bead-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bead-item:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+/* 添加高光效果 */
+.bead-item::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 15%;
+    height: 15%;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* 定义各个颜色系列的珠子样式 */
+.white-bead { 
+    background: radial-gradient(circle at 30% 30%, 
+        #FFFAFA 0%, 
+        #FFF5EE 35%, 
+        #FAF0E6 70%, 
+        #FFF0E6 100%);
+    box-shadow: 
+        inset -2px -2px 6px rgba(255, 240, 230, 0.5),
+        inset 2px 2px 6px rgba(255, 255, 255, 0.9),
+        0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 245, 238, 0.8);
+    /* 添加和田玉特有的光泽效果 */
+    &::after {
+        content: '';
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        width: 50%;
+        height: 50%;
+        background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 250, 250, 0.4) 50%,
+            transparent 100%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+}
+
+/* 修改高光效果，避免与和田玉的光泽效果冲突 */
+.white-bead.bead-item::after {
+    display: none;
+}
+
+.black-bead { 
+    background: radial-gradient(circle at 30% 30%, 
+        #505050 0%, 
+        #282828 40%, 
+        #141414 60%, 
+        #000000 100%);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.3),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.1),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
+.yellow-bead { 
+    background: radial-gradient(circle at 30% 30%, 
+        #ffec82 0%, 
+        #ffd700 40%, 
+        #daa520 60%, 
+        #b8860b 100%);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.1),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.red-bead { 
+    background: radial-gradient(circle at 30% 30%, 
+        #ff9696 0%, 
+        #ff0000 40%, 
+        #c80000 60%, 
+        #a00000 100%);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.green-bead { 
+    background: radial-gradient(circle at 30% 30%, 
+        #90ee90 0%, 
+        #4caf50 40%, 
+        #2e7d32 60%, 
+        #1b5e20 100%);
+    box-shadow: 
+        inset -2px -2px 4px rgba(0, 0, 0, 0.2),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+/* 拖拽时的样式 */
+.bead-item.dragging {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+/* 吸附点样式 */
+.snap-point {
+    position: absolute;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px dashed rgba(0,0,0,0.05);
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.snap-point.active {
+    opacity: 1;
+    border-color: rgba(0,0,0,0.1);
+    background: transparent;
+}
+
+.snap-point.highlight {
+    opacity: 1;
+    border-color: rgba(0,0,0,0.1);
+    background: transparent;
+}
+
+/* 按钮基础样式 */
+.save-btn, .reset-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 保存按钮位置和样式 */
+.save-btn {
+    right: 2rem;
+    background-color: var(--primary-color);
+}
+
+/* 重置按钮位置和样式 */
+.reset-btn {
+    left: 2rem;
+    background-color: #E6A5A5;
+}
+
+.reset-btn:hover {
+    background-color: #D99393;
+}
+
+/* 刻度圆环样式 */
+.ruler-ring {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0.75;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 30%,
+        black 42.5%,
+        black 57.5%,
+        transparent 70%
+    );
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 30%,
+        black 42.5%,
+        black 57.5%,
+        transparent 70%
+    );
+}
+
+.ruler-circle {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 1;
+}
+
+/* 刻度线样式 */
+.ruler-mark {
+    stroke: #ccc;
+    stroke-width: 1;
+    transition: all 0.2s ease;
+    transform-origin: center;
+}
+
+.ruler-mark.major {
+    stroke: #999;
+    stroke-width: 1.5;
+}
+
+/* 放大效果区域 */
+.ruler-mark.scale {
+    stroke-width: 2;
+    stroke: #666;
+    transition: all 0.15s ease;
+}
+
+/* 刻度值样式 */
+.ruler-text {
+    font-size: 8px;
+    fill: #666;
+    text-anchor: middle;
+    transform: translateY(0.3em);
+    font-family: monospace;
+}
+
+/* 当鼠标在控制区域时显示grab光标 */
+.ruler-ring:hover {
+    cursor: default;
+}
+
+.ruler-ring.can-grab {
+    cursor: grab;
+}
+
+.ruler-ring:active {
+    cursor: default;
+}
+
+.ruler-ring.can-grab:active {
+    cursor: grabbing;
+} 

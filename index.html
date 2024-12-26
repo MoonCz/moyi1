@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOYIGEM</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 添加SVG定义 -->
+    <svg width="0" height="0">
+        <defs>
+            <pattern id="dashPattern" width="8" height="8" patternUnits="userSpaceOnUse">
+                <path d="M0,4 L8,4" stroke="#ddd" stroke-width="1" stroke-dasharray="2 6"/>
+            </pattern>
+        </defs>
+    </svg>
+    <div class="container">
+        <header class="page-header">
+            <h1>MOYIGEM</h1>
+            <p class="subtitle">CUSTOM BRACELET</p>
+            <button id="resetDesign" class="btn reset-btn">RESET DESIGN</button>
+            <button id="saveDesign" class="btn save-btn">SAVE DESIGN</button>
+        </header>
+
+        <main>
+            <section class="bracelet-section">
+                <div class="bracelet-display">
+                    <svg class="ruler-ring" viewBox="0 0 800 800">
+                        <circle class="ruler-circle" cx="400" cy="400" r="360" />
+                        <!-- 刻度线会通过JavaScript动态添加 -->
+                    </svg>
+                    <div class="bracelet-circle" id="braceletCircle">
+                    </div>
+                    <div class="bracelet-controls">
+                        <div class="size-control">
+                            <label for="bracelet-size">BRACELET SIZE:</label>
+                            <input type="number" id="bracelet-size" min="120" max="240" value="120" step="10">
+                            <span class="unit">mm</span>
+                            <input type="range" id="bracelet-size-slider" min="120" max="240" value="120" step="10">
+                        </div>
+                        <div class="bead-size-control">
+                            <label for="bead-size">BEAD SIZE:</label>
+                            <input type="number" id="bead-size" min="2" max="20" value="10" step="1">
+                            <span class="unit">mm</span>
+                            <input type="range" id="bead-size-slider" min="2" max="20" value="10" step="1">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="beads-gallery">
+                <div class="color-section white-beads">
+                    <h3>白色系列</h3>
+                    <div class="beads-container">
+                        <!-- 白色串珠将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+                
+                <div class="color-section black-beads">
+                    <h3>黑色系列</h3>
+                    <div class="beads-container">
+                        <!-- 黑色串珠将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+
+                <div class="color-section yellow-beads">
+                    <h3>黄色系列</h3>
+                    <div class="beads-container">
+                        <!-- 黄色串珠将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+
+                <div class="color-section red-beads">
+                    <h3>红色系列</h3>
+                    <div class="beads-container">
+                        <!-- 红色串珠将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+
+                <div class="color-section green-beads">
+                    <h3>绿色系列</h3>
+                    <div class="beads-container">
+                        <!-- 绿色串珠将���过JavaScript动态添加 -->
+                    </div>
+                </div>
+
+                <!-- 其他颜色分类... -->
+            </section>
+        </main>
+
+        <div id="beadPreview" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="previewImage" src="" alt="串珠预览">
+                <div class="bead-info">
+                    <h4 id="previewTitle"></h4>
+                    <p id="previewDesc"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
